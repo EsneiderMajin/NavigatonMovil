@@ -46,28 +46,47 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * A composable function that displays a button on the screen.
+ *
+ * @param data The data for the screen, which includes the color, text, and icon for the button.
+ * @param onClickButton A lambda function that defines what happens when the button is clicked. By default, it does nothing.
+ * @param modifier A Modifier that can be used to adjust the layout or other properties of the composable.
+ */
 @Composable
-fun ScreenButton(data: ScreenData,
-                 onCLickButton: () -> Unit = {},
-                 modifier: Modifier = Modifier) {
-    Column (horizontalAlignment = Alignment.CenterHorizontally,
+fun ScreenButton(
+    data: ScreenData,
+    onClickButton: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
+    // A column is used to arrange its children vertically.
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = modifier.background(color = data.color)){
+        modifier = modifier.background(color = data.color)
+    ) {
+        // Display the text from the data.
         Text(
             text = data.text,
             modifier = modifier
         )
-        Spacer (modifier = Modifier.height(8.dp))
-        Button(onCLickButton) {
-            Row(verticalAlignment = Alignment.CenterVertically){
+        // Provide some spacing.
+        Spacer(modifier = Modifier.height(8.dp))
+        // Create a button that triggers the onClickButton lambda when clicked.
+        Button(onClickButton) {
+            // Arrange the icon and text horizontally in the button.
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                // Display the icon from the data.
                 Icon(imageVector = data.icon, contentDescription = "")
+                // Provide some spacing.
                 Spacer(modifier = Modifier.width(8.dp))
+                // Display the button text from the data.
                 Text(text = data.textButton)
             }
-
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
